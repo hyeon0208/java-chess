@@ -1,6 +1,6 @@
 package chess.view;
 
-import chess.controller.dto.PieceResponse;
+import chess.dto.PieceResponse;
 import chess.domain.piece.Color;
 import chess.domain.piece.Type;
 import java.util.Arrays;
@@ -28,9 +28,9 @@ public class OutputView {
 
     private void addPieceToBoard(final List<PieceResponse> pieces, final char[][] board) {
         for (PieceResponse response : pieces) {
-            int y = response.getRankIndex();
-            int x = response.getFileIndex();
-            board[y][x] = getPieceDisplay(response.getType(), response.getColor());
+            int y = response.rankIndex();
+            int x = response.fileIndex();
+            board[y][x] = getPieceDisplay(response.type(), response.color());
         }
     }
 
