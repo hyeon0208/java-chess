@@ -1,5 +1,6 @@
 package chess;
 
+import chess.domain.controller.Game;
 import chess.view.InputView;
 import chess.view.OutputView;
 

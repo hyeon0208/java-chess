@@ -1,9 +1,9 @@
-package chess;
+package chess.domain.controller;
 
 import chess.domain.Command;
 import chess.domain.board.Board;
 import chess.domain.board.BoardFactory;
-import chess.domain.dto.PieceResponse;
+import chess.domain.controller.dto.PieceResponse;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.square.Square;
