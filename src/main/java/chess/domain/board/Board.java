@@ -44,7 +44,7 @@ public class Board {
     }
 
     private void validatePieceMovement(final Piece piece, final Piece targetPiece, final Movement movement) {
-        piece.validate(movement, targetPiece);
+        piece.validateArrival(movement, targetPiece);
         validateMoveRoute(movement);
     }
 
