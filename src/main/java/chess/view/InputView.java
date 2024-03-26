@@ -34,10 +34,9 @@ public class InputView {
     }
 
     public List<String> readMovement() {
-        String input = scanner.nextLine();
+        String input = scanner.nextLine().trim();
         validateDelimiter(input);
         return Arrays.stream(input.split(MOVE_COMMAND_DELIMITER))
-                .map(String::trim)
                 .toList();
     }
 
