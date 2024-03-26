@@ -1,6 +1,6 @@
 package chess.view;
 
-import chess.domain.dto.PieceResponse;
+import chess.domain.controller.dto.PieceResponse;
 import chess.domain.piece.Color;
 import chess.domain.piece.Type;
 import java.util.Arrays;
@@ -10,19 +10,20 @@ import java.util.stream.IntStream;
 public class OutputView {
     private static final char EMPTY_SQUARE = '.';
     private static final int BOARD_SIZE = 8;
-    private static final char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
 
     public void printBoard(final List<PieceResponse> pieces) {
-        setUpBoard();
+        char[][] board = setUpBoard();
         addPieceToBoard(pieces, board);
         printBoard(board);
         System.out.println();
     }
 
-    private void setUpBoard() {
+    private char[][] setUpBoard() {
+        char[][] board = new char[BOARD_SIZE][BOARD_SIZE];
         for (char[] line : board) {
             Arrays.fill(line, EMPTY_SQUARE);
         }
+        return board;
     }
 
     private void addPieceToBoard(final List<PieceResponse> pieces, final char[][] board) {
