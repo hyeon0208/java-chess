@@ -19,7 +19,6 @@ public class Movement {
         this.target = target;
     }
 
-
     private void validateSameSquare(final Square source, final Square target) {
         if (source.equals(target)) {
             throw new IllegalArgumentException(INVALID_PIECE_MOVEMENT);
@@ -45,8 +44,8 @@ public class Movement {
     }
 
     public Direction direction() {
-        int moveUnit = Math.abs(gcd(getFileDifference(), getRankDifference()));
-        return Direction.of(getFileDifference() / moveUnit, getRankDifference() / moveUnit);
+        int unitDivider = Math.abs(gcd(getFileDifference(), getRankDifference()));
+        return Direction.of(getFileDifference() / unitDivider, getRankDifference() / unitDivider);
     }
 
     private int gcd(int a, int b) {
