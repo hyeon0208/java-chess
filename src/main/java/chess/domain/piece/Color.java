@@ -9,7 +9,7 @@ public enum Color {
         return this == color;
     }
 
-    public Color exchangeTurn() {
+    public Color opposite() {
         if (this.equals(Color.WHITE)) {
             return BLACK;
         }

@@ -3,10 +3,10 @@ package chess.controller;
 import chess.domain.Command;
 import chess.domain.board.Board;
 import chess.domain.board.BoardFactory;
-import chess.controller.dto.PieceResponse;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.square.Square;
+import chess.dto.PieceResponse;
 import chess.view.InputView;
 import chess.view.OutputView;
 import java.util.List;
@@ -24,33 +24,34 @@ public class Game {
     public void start() {
         Board board = BoardFactory.createBoard();
         String command = inputView.readStartCommand();
-        Color nowTurn = Color.WHITE;
+        Color startColor = Color.WHITE;
 
         if (command.equals(Command.START_COMMAND)) {
-            progressTurn(board, nowTurn);
+            progressTurn(board, startColor);
         }
     }
 
-    private void progressTurn(final Board board, Color nowTurn) {
+    private void progressTurn(final Board board, Color startColor) {
         outputView.printBoard(createBoardStatus(board.getPieces()));
         Command command = new Command(inputView.readMovement());
         while (!command.isEnd()) {
-            moveToCommand(board, nowTurn, command);
+            moveToCommand(board, startColor, command);
             outputView.printBoard(createBoardStatus(board.getPieces()));
-            nowTurn = nowTurn.exchangeTurn();
+            startColor = startColor.opposite();
             command = new Command(inputView.readMovement());
         }
     }
 
-    private void moveToCommand(final Board board, final Color nowTurn, final Command command) {
+    private void moveToCommand(final Board board, final Color startColor, final Command command) {
         Square source = Square.from(command.sourceSquare());
         Square target = Square.from(command.targetSquare());
-        board.move(source, target, nowTurn);
+        board.move(source, target, startColor);
     }
 
     private List<PieceResponse> createBoardStatus(final Map<Square, Piece> pieces) {
         return pieces.entrySet().stream()
-                .map(entry -> new PieceResponse(entry.getKey(), entry.getValue()))
+                .map(entry -> new PieceResponse(entry.getKey().getFileIndex(), entry.getKey().getRankIndex(),
+                        entry.getValue().type(), entry.getValue().color()))
                 .toList();
     }
 }

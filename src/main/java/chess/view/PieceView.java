@@ -28,7 +28,7 @@ public enum PieceView {
     }
 
     public char changeToView(final Color color) {
-        if (Color.WHITE.isSame(color)) {
+        if (color.isSame(Color.WHITE)) {
             return Character.toLowerCase(display);
         }
         return display;
