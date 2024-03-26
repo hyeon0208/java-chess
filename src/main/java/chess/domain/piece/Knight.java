@@ -32,10 +32,6 @@ public class Knight extends Piece {
 
     @Override
     public boolean canMove(final Movement movement, final Piece destinationPiece) {
-        int fileDiff = Math.abs(movement.getFileDifference());
-        int rankDiff = Math.abs(movement.getRankDifference());
-        Direction direction = Direction.of(fileDiff, rankDiff);
-
-        return KNIGHT_DIRECTION.contains(direction) && movement.calculateMaxDistance() == MAX_MOVE_DISTANCE;
+        return KNIGHT_DIRECTION.contains(movement.direction()) && movement.calculateMaxDistance() == MAX_MOVE_DISTANCE;
     }
 }

@@ -44,20 +44,27 @@ public class Movement {
         return Square.of(nextRank, nextFile);
     }
 
-    public int getFileDifference() {
+    public Direction direction() {
+        int moveUnit = Math.abs(gcd(getFileDifference(), getRankDifference()));
+        return Direction.of(getFileDifference() / moveUnit, getRankDifference() / moveUnit);
+    }
+
+    private int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+
+    private int getFileDifference() {
         return target.getFileIndex() - source.getFileIndex();
     }
 
-    public int getRankDifference() {
+    private int getRankDifference() {
         return target.getRankIndex() - source.getRankIndex();
     }
 
     public int getSourceRankIndex() {
         return source.getRankIndex();
-    }
-
-    public Direction direction() {
-        int maxDistance = calculateMaxDistance();
-        return Direction.of(getFileDifference() / maxDistance, getRankDifference() / maxDistance);
     }
 }

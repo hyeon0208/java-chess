@@ -38,8 +38,10 @@ class KnightTest {
         Piece knight = new Knight(Color.WHITE);
         Movement movement = new Movement(source, destination);
 
-        //when & then
-        assertThatThrownBy(() -> knight.canMove(movement, null))
-                .isInstanceOf(IllegalArgumentException.class);
+        //when
+        boolean canMove = knight.canMove(movement, null);
+
+        //then
+        assertThat(canMove).isFalse();
     }
 }
