@@ -1,6 +1,6 @@
 package chess.view;
 
-import chess.domain.controller.dto.PieceResponse;
+import chess.controller.dto.PieceResponse;
 import chess.domain.piece.Color;
 import chess.domain.piece.Type;
 import java.util.Arrays;
