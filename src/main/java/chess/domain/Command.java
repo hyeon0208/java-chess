@@ -7,6 +7,7 @@ public class Command {
     public static final String INVALID_MOVE_COMMAND = "부적절한 명령어입니다. move b2 b3와 같이 입력해주세요.";
     public static final String START_COMMAND = "start";
     public static final String END_COMMAND = "end";
+    public static final String STATUS_COMMAND = "status";
 
     private final List<String> commands;
 

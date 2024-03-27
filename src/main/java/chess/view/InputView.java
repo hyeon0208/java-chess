@@ -45,4 +45,13 @@ public class InputView {
             throw new IllegalArgumentException(Command.INVALID_MOVE_COMMAND);
         }
     }
+
+    public boolean readScoreStatus() {
+        System.out.print("""
+                > 점수 결과 보기 : status
+                > 결과를 보지 않으려면 아무 값이나 입력해주세요.
+                """);
+        String input = scanner.nextLine().trim();
+        return input.equals(Command.STATUS_COMMAND);
+    }
 }

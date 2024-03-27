@@ -1,8 +1,9 @@
 package chess.view;
 
-import chess.dto.PieceResponse;
 import chess.domain.piece.Color;
 import chess.domain.piece.Type;
+import chess.dto.PieceResponse;
+import chess.dto.ScoreResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -42,5 +43,14 @@ public class OutputView {
         IntStream.range(0, board.length)
                 .mapToObj(lineCount -> board[board.length - 1 - lineCount])
                 .forEach(System.out::println);
+    }
+
+    public void printScores(final ScoreResponse scoreResponse) {
+        System.out.println(scoreResponse.whiteScore() + "점");
+        System.out.println(scoreResponse.blackScore() + "점");
+    }
+
+    public void printMoveCommandMessage() {
+        System.out.println("이동 명령어를 입력해주세요");
     }
 }
