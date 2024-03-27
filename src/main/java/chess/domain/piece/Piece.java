@@ -17,6 +17,8 @@ public abstract class Piece {
 
     public abstract boolean canMove(final Movement movement, final Piece destinationPiece);
 
+    public abstract double score();
+
     public void validateArrival(final Movement movement, final Piece destinationPiece) {
         validateSameColor(destinationPiece);
         validateDestinationMove(movement, destinationPiece);

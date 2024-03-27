@@ -14,7 +14,6 @@ import chess.domain.Movement;
 import java.util.List;
 
 public class King extends Piece {
-    private static final int MAX_MOVE_DISTANCE = 1;
     private static final List<Direction> KING_DIRECTION;
 
     static {
@@ -24,6 +23,9 @@ public class King extends Piece {
         );
     }
 
+    private static final int MAX_MOVE_DISTANCE = 1;
+    private static final double SCORE = 0;
+
     public King(final Color color) {
         super(color, Type.KING);
     }
@@ -31,5 +33,10 @@ public class King extends Piece {
     @Override
     public boolean canMove(final Movement movement, final Piece destinationPiece) {
         return KING_DIRECTION.contains(movement.direction()) && movement.calculateMaxDistance() == MAX_MOVE_DISTANCE;
+    }
+
+    @Override
+    public double score() {
+        return SCORE;
     }
 }

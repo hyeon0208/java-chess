@@ -3,9 +3,14 @@ package chess.domain.board;
 import chess.domain.Movement;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
+import chess.domain.piece.Type;
 import chess.domain.square.Square;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class Board {
@@ -59,6 +64,33 @@ public class Board {
         if (pieces.containsKey(square)) {
             throw new IllegalArgumentException(INVALID_PIECE_MOVEMENT);
         }
+    }
+
+    public double calculateTotalScoreBy(final Color color) {
+        Map<Integer, Integer> files = new HashMap<>();
+
+        for (Entry<Square, Piece> squarePieceEntry : pieces.entrySet()) {
+            if (squarePieceEntry.getValue().type() == Type.PAWN && squarePieceEntry.getValue().color() == color) {
+                files.put(squarePieceEntry.getKey().getFileIndex(),
+                        files.getOrDefault(squarePieceEntry.getKey().getFileIndex(), 0) + 1);
+            }
+        }
+
+        System.out.println(files);
+
+        int count = files.values().stream()
+                .filter(value -> value > 1)
+                .mapToInt(Integer::intValue)
+                .sum();
+
+        System.out.println(count);
+
+        double sum = pieces.values().stream()
+                .filter(value -> value.isSameColor(color))
+                .mapToDouble(Piece::score)
+                .sum();
+
+        return sum - (count * 0.5);
     }
 
     public Map<Square, Piece> getPieces() {

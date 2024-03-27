@@ -15,7 +15,6 @@ import java.util.List;
 
 public class Knight extends Piece {
     private static final List<Direction> KNIGHT_DIRECTION;
-    private static final int MAX_MOVE_DISTANCE = 2;
 
     static {
         KNIGHT_DIRECTION = List.of(
@@ -26,6 +25,9 @@ public class Knight extends Piece {
         );
     }
 
+    private static final int MAX_MOVE_DISTANCE = 2;
+    private static final double SCORE = 2.5;
+
     public Knight(final Color color) {
         super(color, Type.KNIGHT);
     }
@@ -33,5 +35,10 @@ public class Knight extends Piece {
     @Override
     public boolean canMove(final Movement movement, final Piece destinationPiece) {
         return KNIGHT_DIRECTION.contains(movement.direction()) && movement.calculateMaxDistance() == MAX_MOVE_DISTANCE;
+    }
+
+    @Override
+    public double score() {
+        return SCORE;
     }
 }

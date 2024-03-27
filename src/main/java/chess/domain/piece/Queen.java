@@ -23,6 +23,8 @@ public class Queen extends Piece {
         );
     }
 
+    private static final double SCORE = 9;
+
     public Queen(final Color color) {
         super(color, Type.QUEEN);
     }
@@ -30,5 +32,10 @@ public class Queen extends Piece {
     @Override
     public boolean canMove(final Movement movement, final Piece destinationPiece) {
         return QUEEN_DIRECTION.contains(movement.direction());
+    }
+
+    @Override
+    public double score() {
+        return SCORE;
     }
 }

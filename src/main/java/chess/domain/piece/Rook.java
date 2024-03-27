@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Rook extends Piece {
     private static final List<Direction> ROOK_DIRECTION = List.of(UP, DOWN, LEFT, RIGHT);
+    private static final int SCORE = 5;
 
     public Rook(final Color color) {
         super(color, Type.ROOK);
@@ -19,5 +20,10 @@ public class Rook extends Piece {
     @Override
     public boolean canMove(final Movement movement, final Piece destinationPiece) {
         return ROOK_DIRECTION.contains(movement.direction());
+    }
+
+    @Override
+    public double score() {
+        return SCORE;
     }
 }

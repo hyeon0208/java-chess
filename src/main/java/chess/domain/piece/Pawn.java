@@ -11,8 +11,9 @@ public class Pawn extends Piece {
     private static final Direction BLACK_DIRECTION = Direction.DOWN;
     private static final int DEFAULT_MOVE_DISTANCE = 1;
     private static final int INITIAL_MOVE_DISTANCE = 2;
-    public static final int BLACK_INITIAL_SQUARE = 6;
-    public static final int WHITE_INITIAL_SQUARE = 1;
+    private static final int BLACK_INITIAL_SQUARE = 6;
+    private static final int WHITE_INITIAL_SQUARE = 1;
+    private static final double SCORE = 1;
 
     public Pawn(final Color color) {
         super(color, Type.PAWN);
@@ -90,5 +91,10 @@ public class Pawn extends Piece {
     private boolean isBlackDefaultMove(final Movement movement) {
         return BLACK_DIRECTION.equals(movement.direction())
                 && movement.calculateMaxDistance() == DEFAULT_MOVE_DISTANCE;
+    }
+
+    @Override
+    public double score() {
+        return SCORE;
     }
 }
