@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Board {
     private static final String NO_PIECE_EXCEPTION = "해당 위치에 기물이 없습니다.";
@@ -67,30 +68,22 @@ public class Board {
     }
 
     public double calculateTotalScoreBy(final Color color) {
-        Map<Integer, Integer> files = new HashMap<>();
-
-        for (Entry<Square, Piece> squarePieceEntry : pieces.entrySet()) {
-            if (squarePieceEntry.getValue().type() == Type.PAWN && squarePieceEntry.getValue().color() == color) {
-                files.put(squarePieceEntry.getKey().getFileIndex(),
-                        files.getOrDefault(squarePieceEntry.getKey().getFileIndex(), 0) + 1);
-            }
-        }
-
-        System.out.println(files);
-
-        int count = files.values().stream()
-                .filter(value -> value > 1)
-                .mapToInt(Integer::intValue)
-                .sum();
-
-        System.out.println(count);
-
-        double sum = pieces.values().stream()
-                .filter(value -> value.isSameColor(color))
+        double totalScore = pieces.values().stream()
+                .filter(piece -> piece.isSameColor(color))
                 .mapToDouble(Piece::score)
                 .sum();
 
-        return sum - (count * 0.5);
+        return totalScore - calculateTotalPenalty(color);
+    }
+
+    private double calculateTotalPenalty(final Color color) {
+        return pieces.entrySet().stream()
+                .filter(entry -> entry.getValue().type() == Type.PAWN && entry.getValue().color() == color)
+                .collect(Collectors.groupingBy(entry -> entry.getKey().getFileIndex(), Collectors.counting()))
+                .values().stream()
+                .filter(count -> count > 1)
+                .mapToDouble(count -> count * 0.5)
+                .sum();
     }
 
     public Map<Square, Piece> getPieces() {
