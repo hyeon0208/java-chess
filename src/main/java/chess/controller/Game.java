@@ -6,8 +6,9 @@ import chess.domain.board.BoardFactory;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.square.Square;
-import chess.dto.PieceResponse;
-import chess.dto.ScoreResponse;
+import chess.view.dto.PieceResponse;
+import chess.view.dto.PieceResponses;
+import chess.view.dto.ScoreResponse;
 import chess.view.InputView;
 import chess.view.OutputView;
 import java.util.List;
@@ -27,17 +28,17 @@ public class Game {
         String command = inputView.readStartCommand();
 
         if (command.equals(Command.START_COMMAND)) {
+            outputView.printBoard(PieceResponses.toDto(board));
             progress(board);
         }
     }
 
     private void progress(final Board board) {
         Color startColor = Color.WHITE;
-        outputView.printBoard(createBoardStatus(board.getPieces()));
         Command command = new Command(inputView.readMovement());
         while (!command.isEnd()) {
             moveByCommand(board, startColor, command);
-            outputView.printBoard(createBoardStatus(board.getPieces()));
+            outputView.printBoard(PieceResponses.toDto(board));
             showScore(board);
             startColor = startColor.opposite();
             command = new Command(inputView.readMovement());
@@ -59,16 +60,5 @@ public class Game {
         Square source = Square.from(command.sourceSquare());
         Square target = Square.from(command.targetSquare());
         board.move(source, target, startColor);
-    }
-
-    private List<PieceResponse> createBoardStatus(final Map<Square, Piece> pieces) {
-        return pieces.entrySet().stream()
-                .map(entry -> new PieceResponse(
-                        entry.getKey().getFileIndex(),
-                        entry.getKey().getRankIndex(),
-                        entry.getValue().type(),
-                        entry.getValue().color())
-                )
-                .toList();
     }
 }

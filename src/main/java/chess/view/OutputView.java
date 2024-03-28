@@ -2,8 +2,9 @@ package chess.view;
 
 import chess.domain.piece.Color;
 import chess.domain.piece.Type;
-import chess.dto.PieceResponse;
-import chess.dto.ScoreResponse;
+import chess.view.dto.PieceResponse;
+import chess.view.dto.PieceResponses;
+import chess.view.dto.ScoreResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -12,9 +13,9 @@ public class OutputView {
     private static final char EMPTY_SQUARE = '.';
     private static final int BOARD_SIZE = 8;
 
-    public void printBoard(final List<PieceResponse> pieces) {
+    public void printBoard(final PieceResponses pieceResponses) {
         char[][] board = setUpBoard();
-        addPieceToBoard(pieces, board);
+        addPieceToBoard(pieceResponses.pieces(), board);
         printBoard(board);
         System.out.println();
     }
