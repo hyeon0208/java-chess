@@ -13,6 +13,15 @@ public class OutputView {
     private static final char EMPTY_SQUARE = '.';
     private static final int BOARD_SIZE = 8;
 
+    public void printStartMessage() {
+        System.out.print("""
+                > 체스 게임을 시작합니다.
+                > 게임 시작 : start
+                > 게임 종료 : end
+                > 게임 이동 : move source위치 target위치 - 예. move b2 b3
+                """);
+    }
+
     public void printBoard(final PieceResponses pieceResponses) {
         char[][] board = setUpBoard();
         addPieceToBoard(pieceResponses.pieces(), board);
@@ -47,11 +56,7 @@ public class OutputView {
     }
 
     public void printScores(final ScoreResponse scoreResponse) {
-        System.out.println(scoreResponse.whiteScore() + "점");
-        System.out.println(scoreResponse.blackScore() + "점");
-    }
-
-    public void printMoveCommandMessage() {
-        System.out.println("이동 명령어를 입력해주세요");
+        System.out.printf("하얀색 : %.1f점 %n", scoreResponse.whiteScore());
+        System.out.printf("검은색 : %.1f점 %n", scoreResponse.blackScore());
     }
 }
