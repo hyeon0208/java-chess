@@ -1,6 +1,7 @@
 package chess.domain.piece;
 
 import chess.domain.Movement;
+import chess.domain.game.Turn;
 import java.util.Objects;
 
 public abstract class Piece {
@@ -45,6 +46,10 @@ public abstract class Piece {
 
     public boolean isSameColor(final Color color) {
         return this.color == color;
+    }
+
+    public boolean isSameColor(final Turn turn) {
+        return this.color.name().equals(turn.name());
     }
 
     public Color color() {
