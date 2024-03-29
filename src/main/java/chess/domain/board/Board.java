@@ -1,18 +1,14 @@
 package chess.domain.board;
 
 import chess.domain.Movement;
-import chess.domain.piece.Color;
+import chess.domain.game.Turn;
 import chess.domain.piece.Piece;
 import chess.domain.piece.Type;
 import chess.domain.square.Square;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Board {
     private static final String NO_PIECE_EXCEPTION = "해당 위치에 기물이 없습니다.";
@@ -25,7 +21,11 @@ public class Board {
         this.pieces = pieces;
     }
 
-    public void move(final Square source, final Square target, final Color turn) {
+    public Board() {
+        pieces = new HashMap<>();
+    }
+
+    public void move(final Square source, final Square target, final Turn turn) {
         Piece sourcePiece = pieces.get(source);
         validateEmptyPiece(sourcePiece);
         validateTurn(sourcePiece, turn);
@@ -43,7 +43,7 @@ public class Board {
         }
     }
 
-    private void validateTurn(final Piece piece, final Color turn) {
+    private void validateTurn(final Piece piece, final Turn turn) {
         if (!piece.isSameColor(turn)) {
             throw new IllegalArgumentException(INVALID_TURN);
         }
@@ -67,23 +67,11 @@ public class Board {
         }
     }
 
-    public double calculateTotalScoreBy(final Color color) {
-        double totalScore = pieces.values().stream()
-                .filter(piece -> piece.isSameColor(color))
-                .mapToDouble(Piece::score)
-                .sum();
-
-        return totalScore - calculateTotalPenalty(color);
-    }
-
-    private double calculateTotalPenalty(final Color color) {
-        return pieces.entrySet().stream()
-                .filter(entry -> entry.getValue().type() == Type.PAWN && entry.getValue().color() == color)
-                .collect(Collectors.groupingBy(entry -> entry.getKey().getFileIndex(), Collectors.counting()))
-                .values().stream()
-                .filter(count -> count > 1)
-                .mapToDouble(count -> count * 0.5)
-                .sum();
+    public boolean kingDead() {
+        long kingCount = pieces.values().stream()
+                .filter(piece -> piece.type().equals(Type.KING))
+                .count();
+        return kingCount == 1;
     }
 
     public Map<Square, Piece> getPieces() {

@@ -5,17 +5,11 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import chess.domain.piece.Bishop;
+import chess.domain.game.Turn;
 import chess.domain.piece.Color;
-import chess.domain.piece.King;
-import chess.domain.piece.Knight;
-import chess.domain.piece.Pawn;
 import chess.domain.piece.Piece;
-import chess.domain.piece.Queen;
-import chess.domain.piece.Rook;
 import chess.domain.piece.Type;
 import chess.domain.square.Square;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -48,7 +42,7 @@ class BoardTest {
         Square to = Square.from("c5");
 
         //when & then
-        assertThatThrownBy(() -> board.move(from, to, Color.WHITE))
+        assertThatThrownBy(() -> board.move(from, to, Turn.WHITE))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -60,7 +54,7 @@ class BoardTest {
         Square to = Square.from("c3");
 
         //when & then
-        assertThatThrownBy(() -> board.move(from, to, Color.BLACK))
+        assertThatThrownBy(() -> board.move(from, to, Turn.BLACK))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -72,7 +66,7 @@ class BoardTest {
         Square to = Square.from("c5");
 
         //when & then
-        assertThatThrownBy(() -> board.move(from, to, Color.WHITE))
+        assertThatThrownBy(() -> board.move(from, to, Turn.WHITE))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -84,7 +78,7 @@ class BoardTest {
         Square to = Square.from("f4");
 
         //when & then
-        assertThatThrownBy(() -> board.move(from, to, Color.WHITE))
+        assertThatThrownBy(() -> board.move(from, to, Turn.WHITE))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -96,7 +90,7 @@ class BoardTest {
         Square to = Square.from("c3");
 
         //when & then
-        assertThatCode(() -> board.move(from, to, Color.WHITE))
+        assertThatCode(() -> board.move(from, to, Turn.WHITE))
                 .doesNotThrowAnyException();
     }
 
@@ -108,7 +102,7 @@ class BoardTest {
         Square to = Square.from("a2");
 
         //when & then
-        assertThatThrownBy(() -> board.move(from, to, Color.WHITE))
+        assertThatThrownBy(() -> board.move(from, to, Turn.WHITE))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -120,43 +114,13 @@ class BoardTest {
         Square to = Square.from("a3");
 
         //when
-        board.move(from, to, Color.WHITE);
+        board.move(from, to, Turn.WHITE);
         Map<Square, Piece> pieces = board.getPieces();
 
         //then
         assertAll(
                 () -> assertThat(pieces.get(to).type()).isEqualTo(Type.PAWN),
                 () -> assertThat(pieces.get(to).color()).isEqualTo(Color.WHITE)
-        );
-    }
-
-    @DisplayName("남아있는 기물의 점수를 출력한다.")
-    @Test
-    void calculateTotalScoreBy() {
-        //given
-
-        Map<Square, Piece> pieces = new HashMap<>();
-        pieces.put(Square.from("a2"), new Pawn(Color.WHITE));
-        pieces.put(Square.from("a3"), new Pawn(Color.WHITE));
-        pieces.put(Square.from("b3"), new Pawn(Color.WHITE));
-        pieces.put(Square.from("f1"), new King(Color.WHITE));
-        pieces.put(Square.from("e1"), new Queen(Color.WHITE));
-
-        pieces.put(Square.from("a7"), new Pawn(Color.BLACK));
-        pieces.put(Square.from("b7"), new Pawn(Color.BLACK));
-        pieces.put(Square.from("a1"), new Rook(Color.BLACK));
-        pieces.put(Square.from("b1"), new Knight(Color.BLACK));
-        pieces.put(Square.from("c1"), new Bishop(Color.BLACK));
-        Board fakeBoard = new Board(pieces);
-
-        //when
-        double whiteScore = fakeBoard.calculateTotalScoreBy(Color.WHITE);
-        double blackScore = fakeBoard.calculateTotalScoreBy(Color.BLACK);
-
-        //then
-        assertAll(
-                () -> assertThat(whiteScore).isEqualTo(11),
-                () -> assertThat(blackScore).isEqualTo(12.5)
         );
     }
 }
