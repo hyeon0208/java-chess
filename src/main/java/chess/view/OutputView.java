@@ -10,8 +10,13 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class OutputView {
+    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final char EMPTY_SQUARE = '.';
     private static final int BOARD_SIZE = 8;
+
+    public void printErrorMessage(final String message) {
+        System.out.println(ERROR_PREFIX + message);
+    }
 
     public void printStartMessage() {
         System.out.print("""

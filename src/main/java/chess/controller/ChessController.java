@@ -38,19 +38,19 @@ public class ChessController {
         outputView.printStartMessage();
         CommandType commandType = CommandType.START;
         while (commandType != CommandType.END) {
-            commandType = retry();
+            commandType = progress();
         }
     }
 
-    private CommandType retry() {
+    private CommandType progress() {
         try {
             Command command = new Command(inputView.readGameCommand());
             CommandType commandType = command.getCommand();
             CommandAction commandAction = commandInvoker.get(commandType);
             return commandAction.execute(chessGame, command);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return retry();
+        } catch (IllegalArgumentException error) {
+            outputView.printErrorMessage(error.getMessage());
+            return progress();
         }
     }
 
