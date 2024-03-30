@@ -3,7 +3,6 @@ package chess.domain.board;
 import chess.domain.Movement;
 import chess.domain.game.Turn;
 import chess.domain.piece.Piece;
-import chess.domain.piece.Type;
 import chess.domain.square.Square;
 import java.util.Collections;
 import java.util.HashMap;

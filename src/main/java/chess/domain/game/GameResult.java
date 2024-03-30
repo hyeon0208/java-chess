@@ -2,7 +2,6 @@ package chess.domain.game;
 
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
-import chess.domain.piece.Type;
 import chess.domain.square.Square;
 import java.util.Map;
 import java.util.stream.Collectors;

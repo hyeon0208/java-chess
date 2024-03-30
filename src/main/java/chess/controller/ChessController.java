@@ -1,14 +1,14 @@
 package chess.controller;
 
+import chess.domain.command.Command;
 import chess.domain.command.CommandAction;
-import chess.domain.game.ChessGame;
 import chess.domain.command.CommandType;
+import chess.domain.game.ChessGame;
 import chess.domain.game.GameResult;
 import chess.domain.piece.Color;
 import chess.domain.square.Square;
 import chess.view.InputView;
 import chess.view.OutputView;
-import chess.domain.command.Command;
 import chess.view.dto.PieceResponses;
 import chess.view.dto.ScoreResponse;
 import java.util.EnumMap;

@@ -1,9 +1,8 @@
 package chess.domain.game;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-import chess.domain.board.Board;
 import chess.domain.piece.Bishop;
 import chess.domain.piece.Color;
 import chess.domain.piece.King;
@@ -25,7 +24,6 @@ class GameResultTest {
     @Test
     void calculateTotalScoreBy() {
         //given
-
         Map<Square, Piece> pieces = new HashMap<>();
         pieces.put(Square.from("a2"), new Pawn(Color.WHITE));
         pieces.put(Square.from("a3"), new Pawn(Color.WHITE));
