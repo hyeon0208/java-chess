@@ -29,7 +29,7 @@ public class Movement {
         int maxDistance = calculateMaxDistance();
         Set<Square> route = new HashSet<>();
         IntStream.range(1, maxDistance)
-                .forEach(distance -> route.add(findSquareBy(distance)));
+                .forEach(distance -> route.add(findSquareBy(maxDistance, distance)));
         return route;
     }
 
@@ -37,9 +37,9 @@ public class Movement {
         return Math.max(Math.abs(getFileDifference()), Math.abs(getRankDifference()));
     }
 
-    private Square findSquareBy(final int distance) {
-        Rank nextRank = Rank.of(source.getRankIndex(), target.getRankIndex() * distance);
-        File nextFile = File.of(source.getRankIndex(), target.getRankIndex() * distance);
+    private Square findSquareBy(final int maxDistance, final int distance) {
+        Rank nextRank = Rank.from((getRankDifference() / maxDistance) * distance);
+        File nextFile = File.from((getFileDifference() / maxDistance) * distance);
         return Square.of(nextRank, nextFile);
     }
 

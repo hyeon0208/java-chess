@@ -15,16 +15,17 @@ public enum Rank {
 
     public static final String INVALID_RANK = "유효하지 않는 랭크입니다.";
 
-    public static Rank from(final String rank) {
+    public static Rank from(final String input) {
         return Arrays.stream(Rank.values())
-                .filter(value -> (value.ordinal() + 1) == Integer.parseInt(rank))
+                .filter(rank -> (rank.ordinal() + 1) == Integer.parseInt(input))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_RANK));
     }
 
-    public static Rank of(final int sourceIndex, final int targetIndex) {
-        return Arrays.stream(values())
-                .filter(rank -> rank.ordinal() == Math.abs(sourceIndex - targetIndex))
+
+    public static Rank from(final int index) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.ordinal() == index)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_RANK));
     }
