@@ -7,9 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.domain.game.Turn;
 import chess.domain.piece.Color;
+import chess.domain.piece.King;
 import chess.domain.piece.Piece;
+import chess.domain.piece.Rook;
 import chess.domain.piece.Type;
 import chess.domain.square.Square;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -122,5 +125,24 @@ class BoardTest {
                 () -> assertThat(pieces.get(to).type()).isEqualTo(Type.PAWN),
                 () -> assertThat(pieces.get(to).color()).isEqualTo(Color.WHITE)
         );
+    }
+
+    @DisplayName("킹이 잡혔는지 확인다.")
+    @Test
+    void kindDead() {
+        //given
+        Map<Square, Piece> pieces = new HashMap<>();
+        pieces.put(Square.from("a1"), new Rook(Color.WHITE));
+        pieces.put(Square.from("a8"), new King(Color.BLACK));
+        Board fakeBoard = new Board(pieces);
+
+        Square from = Square.from("a1");
+        Square to = Square.from("a8");
+
+        //when
+        fakeBoard.move(from, to, Turn.WHITE);
+
+        //then
+        assertThat(fakeBoard.kingDead()).isTrue();
     }
 }
