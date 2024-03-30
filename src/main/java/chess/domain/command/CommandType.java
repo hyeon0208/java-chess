@@ -8,6 +8,9 @@ public enum CommandType {
     MOVE("move", 3),
     END("end", 1),
     STATUS("status", 1),
+    SEARCH("search", 1),
+    LOAD("load", 2),
+    SAVE("save", 1),
     ;
 
     private static final int COMMAND_INDEX = 0;
