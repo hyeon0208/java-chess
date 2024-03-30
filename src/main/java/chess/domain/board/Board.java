@@ -14,6 +14,7 @@ public class Board {
     private static final String NO_PIECE_EXCEPTION = "해당 위치에 기물이 없습니다.";
     private static final String INVALID_TURN = "헤당 색의 턴이 아닙니다.";
     private static final String INVALID_PIECE_MOVEMENT = "해당 기물은 위치로 이동할 수 없습니다.";
+    private static final int INITIAL_KING_COUNT = 2;
 
     private final Map<Square, Piece> pieces;
 
@@ -51,7 +52,9 @@ public class Board {
 
     private void validatePieceMovement(final Piece piece, final Piece targetPiece, final Movement movement) {
         piece.validateArrival(movement, targetPiece);
-        validateMoveRoute(movement);
+        if (!piece.isKnight()) {
+            validateMoveRoute(movement);
+        }
     }
 
     private void validateMoveRoute(final Movement movement) {
@@ -69,9 +72,10 @@ public class Board {
 
     public boolean kingDead() {
         long kingCount = pieces.values().stream()
-                .filter(piece -> piece.type().equals(Type.KING))
+                .filter(Piece::isKing)
                 .count();
-        return kingCount == 1;
+
+        return kingCount < INITIAL_KING_COUNT;
     }
 
     public Map<Square, Piece> getPieces() {

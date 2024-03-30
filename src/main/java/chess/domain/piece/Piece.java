@@ -52,12 +52,24 @@ public abstract class Piece {
         return this.color.name().equals(turn.name());
     }
 
-    public Color color() {
-        return color;
+    public boolean isKnight() {
+        return this.type.equals(Type.KNIGHT);
+    }
+
+    public boolean isPawn() {
+        return this.type.equals(Type.PAWN);
+    }
+
+    public boolean isKing() {
+        return this.type.equals(Type.KING);
     }
 
     public Type type() {
         return type;
+    }
+
+    public Color color() {
+        return color;
     }
 
     @Override
