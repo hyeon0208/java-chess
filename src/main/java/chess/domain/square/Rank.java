@@ -17,15 +17,21 @@ public enum Rank {
 
     public static Rank from(final String input) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> (rank.ordinal() + 1) == Integer.parseInt(input))
+                .filter(rank -> rank.ordinal() == Integer.parseInt(input) - 1)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_RANK));
     }
 
-
     public static Rank from(final int index) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.ordinal() == index)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_RANK));
+    }
+
+    public static Rank of(final int sourceIndex, final int nextIndex) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.ordinal() == sourceIndex + nextIndex)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_RANK));
     }

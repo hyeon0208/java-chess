@@ -1,3 +1,6 @@
+### 사용자 정의 ###
+./docker/docker-compose.yml
+
 HELP.md
 .gradle
 build/

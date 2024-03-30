@@ -28,4 +28,11 @@ public enum File {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_FILE));
     }
+
+    public static File of(final int sourceIndex, final int nextIndex) {
+        return Arrays.stream(values())
+                .filter(file -> file.ordinal() == sourceIndex + nextIndex)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_FILE));
+    }
 }

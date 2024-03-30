@@ -38,9 +38,11 @@ public class Movement {
     }
 
     private Square findSquareBy(final int maxDistance, final int distance) {
-        Rank nextRank = Rank.from((getRankDifference() / maxDistance) * distance);
-        File nextFile = File.from((getFileDifference() / maxDistance) * distance);
-        return Square.of(nextRank, nextFile);
+        int nextRank = (getRankDifference() / maxDistance) * distance;
+        int nextFile = (getFileDifference() / maxDistance) * distance;
+        Rank newRank = Rank.of(source.getRankIndex(), nextRank);
+        File newFile = File.of(source.getFileIndex(), nextFile);
+        return Square.of(newRank, newFile);
     }
 
     public Direction direction() {
