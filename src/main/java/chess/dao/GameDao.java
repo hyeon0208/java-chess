@@ -57,6 +57,9 @@ public class GameDao implements GameRepository {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 Map<Square, Piece> board = new HashMap<>();
                 PieceMapper pieceMapper = new PieceMapper();
+                if (!resultSet.next()) {
+                    throw new IllegalArgumentException("해당 ID의 게임을 찾을 수 없습니다 : " + gameId);
+                }
                 while (resultSet.next()) {
                     turn = Turn.valueOf(resultSet.getString("turn"));
                     Rank rank = Rank.from(resultSet.getInt("x"));
