@@ -21,7 +21,7 @@ public class JdbcConnection {
             connection.setAutoCommit(false);
             return connection;
         } catch (final SQLException exception) {
-            System.err.println("DB 연결 오류 :" + exception.getMessage());
+            System.err.println("DB 연결 오류 : " + exception.getMessage());
             return null;
         }
     }

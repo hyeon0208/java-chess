@@ -1,6 +1,7 @@
 package chess.dao;
 
 import chess.dto.PieceResponse;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class PieceDaoFake implements PieceRepository {
     }
 
     @Override
-    public Long save(final PieceResponse pieceResponse, final Long gameId) {
+    public Long save(final PieceResponse pieceResponse, final Long gameId, final Connection connection) {
         pieceId++;
         pieceRepository.put(gameId, pieceResponse);
         return pieceId;

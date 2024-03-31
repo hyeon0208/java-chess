@@ -21,21 +21,29 @@ public class ChessGameService {
     }
 
     public Long saveGame(final ChessGame chessGame) {
-        Long gameId = gameRepository.save(chessGame);
-        List<PieceResponse> pieceResponses = getPieceResponses(chessGame.getBoard());
-        for (PieceResponse pieceResponse : pieceResponses) {
-            pieceRepository.save(pieceResponse, gameId);
-        }
-        return gameId;
+        return Transaction.start(connection -> {
+            Long gameId = gameRepository.save(chessGame, connection);
+            List<PieceResponse> pieceResponses = getPieceResponses(chessGame.getBoard());
+            for (PieceResponse pieceResponse : pieceResponses) {
+                pieceRepository.save(pieceResponse, gameId, connection);
+            }
+            return gameId;
+        });
     }
 
     public void loadGame(final ChessGame chessGame, final Long gameId) {
-        ChessGameResponse chessGameResponse = gameRepository.findById(gameId);
-        chessGame.load(chessGameResponse);
+        Transaction.start(connection -> {
+            ChessGameResponse chessGameResponse = gameRepository.findById(gameId, connection);
+            chessGame.load(chessGameResponse);
+            return null;
+        });
     }
 
     public List<Long> findAllGame() {
-        return gameRepository.findIdAll();
+        return Transaction.start(connection -> {
+            List<Long> gameIds = gameRepository.findIdAll(connection);
+            return gameIds;
+        });
     }
 
     public List<PieceResponse> getPieceResponses(final Board board) {
