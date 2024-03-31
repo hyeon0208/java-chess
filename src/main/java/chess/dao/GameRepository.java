@@ -1,14 +1,14 @@
 package chess.dao;
 
 import chess.domain.game.ChessGame;
+import chess.view.dto.ChessGameResponse;
 import java.util.List;
-import java.util.Optional;
 
 public interface GameRepository {
 
     Long save(ChessGame chessGame);
 
-    Optional<ChessGame> findById(Long roomId);
+    ChessGameResponse findById(Long gameId);
 
     List<Long> findIdAll();
 }

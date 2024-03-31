@@ -10,6 +10,7 @@ import chess.domain.piece.Type;
 import chess.domain.square.File;
 import chess.domain.square.Rank;
 import chess.domain.square.Square;
+import chess.view.dto.ChessGameResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class GameDao implements GameRepository {
 
@@ -46,7 +46,7 @@ public class GameDao implements GameRepository {
     }
 
     @Override
-    public Optional<ChessGame> findById(final Long gameId) {
+    public ChessGameResponse findById(final Long gameId) {
         try (Connection connection = JdbcConnection.getConnection()) {
             String query = "SELECT turn, x, y, type, color FROM game g "
                     + "JOIN piece p ON g.game_id = p.game_id WHERE p.game_id = ?";
@@ -66,7 +66,7 @@ public class GameDao implements GameRepository {
                     board.put(Square.of(rank, file), pieceMapper.map(type, color));
                 }
                 connection.commit();
-                return Optional.of(new ChessGame(new Board(board), turn));
+                return new ChessGameResponse(new Board(board), turn);
             } catch (SQLException exception) {
                 connection.rollback();
                 throw new RuntimeException(exception);
