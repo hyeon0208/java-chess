@@ -15,6 +15,8 @@ import java.util.List;
 
 public class King extends Piece {
     private static final List<Direction> KING_DIRECTION;
+    private static final int MAX_MOVE_DISTANCE = 1;
+    private static final double SCORE = 0;
 
     static {
         KING_DIRECTION = List.of(
@@ -22,9 +24,6 @@ public class King extends Piece {
                 UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT
         );
     }
-
-    private static final int MAX_MOVE_DISTANCE = 1;
-    private static final double SCORE = 0;
 
     public King(final Color color) {
         super(color, Type.KING);

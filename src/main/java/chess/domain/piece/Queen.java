@@ -15,6 +15,7 @@ import java.util.List;
 
 public class Queen extends Piece {
     private static final List<Direction> QUEEN_DIRECTION;
+    private static final double SCORE = 9;
 
     static {
         QUEEN_DIRECTION = List.of(
@@ -22,8 +23,6 @@ public class Queen extends Piece {
                 UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT
         );
     }
-
-    private static final double SCORE = 9;
 
     public Queen(final Color color) {
         super(color, Type.QUEEN);

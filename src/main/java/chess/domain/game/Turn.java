@@ -6,7 +6,7 @@ public enum Turn {
     ;
 
     public Turn next() {
-    if (this.equals(Turn.WHITE)) {
+        if (this.equals(Turn.WHITE)) {
             return BLACK;
         }
         return WHITE;

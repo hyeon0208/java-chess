@@ -1,6 +1,5 @@
 package chess.domain.piece;
 
-import chess.domain.square.Square;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
