@@ -12,7 +12,7 @@ import chess.domain.square.Square;
 import chess.service.ChessGameService;
 import chess.view.InputView;
 import chess.view.OutputView;
-import chess.view.dto.GameResultResponse;
+import chess.dto.GameResultResponse;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;

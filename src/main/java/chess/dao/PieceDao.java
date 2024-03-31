@@ -1,6 +1,6 @@
 package chess.dao;
 
-import chess.view.dto.PieceResponse;
+import chess.dto.PieceResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

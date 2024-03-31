@@ -1,6 +1,6 @@
 package chess.dao;
 
-import chess.view.dto.PieceResponse;
+import chess.dto.PieceResponse;
 
 public interface PieceRepository {
 

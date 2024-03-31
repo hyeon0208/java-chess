@@ -3,7 +3,7 @@ package chess.domain.game;
 import chess.domain.board.Board;
 import chess.domain.board.BoardFactory;
 import chess.domain.square.Square;
-import chess.view.dto.ChessGameResponse;
+import chess.dto.ChessGameResponse;
 
 public class ChessGame {
     private Board board;

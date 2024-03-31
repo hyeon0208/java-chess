@@ -6,8 +6,8 @@ import chess.domain.board.Board;
 import chess.domain.game.ChessGame;
 import chess.domain.piece.Piece;
 import chess.domain.square.Square;
-import chess.view.dto.ChessGameResponse;
-import chess.view.dto.PieceResponse;
+import chess.dto.ChessGameResponse;
+import chess.dto.PieceResponse;
 import java.util.List;
 import java.util.Map;
 

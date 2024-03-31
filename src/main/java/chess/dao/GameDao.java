@@ -10,7 +10,7 @@ import chess.domain.piece.Type;
 import chess.domain.square.File;
 import chess.domain.square.Rank;
 import chess.domain.square.Square;
-import chess.view.dto.ChessGameResponse;
+import chess.dto.ChessGameResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

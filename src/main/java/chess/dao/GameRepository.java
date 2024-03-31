@@ -1,7 +1,7 @@
 package chess.dao;
 
 import chess.domain.game.ChessGame;
-import chess.view.dto.ChessGameResponse;
+import chess.dto.ChessGameResponse;
 import java.util.List;
 
 public interface GameRepository {
