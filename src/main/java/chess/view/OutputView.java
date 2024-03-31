@@ -1,10 +1,11 @@
 package chess.view;
 
+import chess.domain.game.Winner;
 import chess.domain.piece.Color;
 import chess.domain.piece.Type;
 import chess.view.dto.PieceResponse;
 import chess.view.dto.PieceResponses;
-import chess.view.dto.ScoreResponse;
+import chess.view.dto.GameResultResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -60,8 +61,27 @@ public class OutputView {
                 .forEach(System.out::println);
     }
 
-    public void printScores(final ScoreResponse scoreResponse) {
-        System.out.printf("하얀색 : %.1f점 %n", scoreResponse.whiteScore());
-        System.out.printf("검은색 : %.1f점 %n", scoreResponse.blackScore());
+    public void printGameResult(final GameResultResponse gameResultResponse) {
+        printScores(gameResultResponse.whiteScore(), gameResultResponse.blackScore());
+        printWinner(gameResultResponse.winner());
+    }
+
+    private void printScores(final double whiteScore, final double blackScore) {
+        System.out.printf("하얀색 : %.1f점 %n", whiteScore);
+        System.out.printf("검은색 : %.1f점 %n", blackScore);
+    }
+
+    private void printWinner(final Winner winner) {
+        if (winner.tie()) {
+            System.out.println("무승부");
+            return;
+        }
+        if (winner.whiteWin()) {
+            System.out.printf("우승자 : %s %n", winner);
+            return;
+        }
+        if (winner.blackWin()) {
+            System.out.printf("우승자 : %s %n", winner);
+        }
     }
 }
