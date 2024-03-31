@@ -3,9 +3,8 @@ package chess.view;
 import chess.domain.game.Winner;
 import chess.domain.piece.Color;
 import chess.domain.piece.Type;
-import chess.view.dto.PieceResponse;
-import chess.view.dto.PieceResponses;
 import chess.view.dto.GameResultResponse;
+import chess.view.dto.PieceResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -28,9 +27,9 @@ public class OutputView {
                 """);
     }
 
-    public void printBoard(final PieceResponses pieceResponses) {
+    public void printBoard(final List<PieceResponse> pieceResponses) {
         char[][] board = setUpBoard();
-        addPieceToBoard(pieceResponses.pieces(), board);
+        addPieceToBoard(pieceResponses, board);
         printBoard(board);
         System.out.println();
     }
@@ -59,6 +58,19 @@ public class OutputView {
         IntStream.range(0, board.length)
                 .mapToObj(lineCount -> board[board.length - 1 - lineCount])
                 .forEach(System.out::println);
+    }
+
+    public void printSaveMessage(final Long gameId) {
+        System.out.printf("게임 ID : %d로 저장되었습니다.%n", gameId);
+    }
+
+    public void printGameIds(final List<Long> gameIds) {
+        StringBuilder builder = new StringBuilder();
+        for (Long gameId : gameIds) {
+            String message = String.format("게임 ID : %d %n", gameId);
+            builder.append(message);
+        }
+        System.out.println(builder);
     }
 
     public void printGameResult(final GameResultResponse gameResultResponse) {
