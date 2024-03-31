@@ -28,15 +28,24 @@ class ScoreTest {
         pieces.put(Square.from("a2"), new Pawn(Color.WHITE));
         pieces.put(Square.from("a3"), new Pawn(Color.WHITE));
         pieces.put(Square.from("b3"), new Pawn(Color.WHITE));
-        pieces.put(Square.from("f1"), new King(Color.WHITE));
         pieces.put(Square.from("e1"), new Queen(Color.WHITE));
+        pieces.put(Square.from("f1"), new King(Color.WHITE));
 
         pieces.put(Square.from("a7"), new Pawn(Color.BLACK));
         pieces.put(Square.from("b7"), new Pawn(Color.BLACK));
-        pieces.put(Square.from("a1"), new Rook(Color.BLACK));
-        pieces.put(Square.from("b1"), new Knight(Color.BLACK));
-        pieces.put(Square.from("c1"), new Bishop(Color.BLACK));
-
+        pieces.put(Square.from("a8"), new Rook(Color.BLACK));
+        pieces.put(Square.from("b8"), new Knight(Color.BLACK));
+        pieces.put(Square.from("c8"), new Bishop(Color.BLACK));
+        /*
+        RNB.....
+        PP......
+        ........
+        ........
+        ........
+        pp......
+        p.......
+        ....qk..
+         */
         Score score = new Score(pieces);
 
         //when
