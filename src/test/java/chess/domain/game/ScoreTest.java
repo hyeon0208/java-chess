@@ -17,8 +17,8 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("게임 결과")
-class GameResultTest {
+@DisplayName("게임 점수")
+class ScoreTest {
 
     @DisplayName("남아있는 기물의 점수를 출력한다.")
     @Test
@@ -37,11 +37,11 @@ class GameResultTest {
         pieces.put(Square.from("b1"), new Knight(Color.BLACK));
         pieces.put(Square.from("c1"), new Bishop(Color.BLACK));
 
-        GameResult gameResult = new GameResult(pieces);
+        Score score = new Score(pieces);
 
         //when
-        double whiteScore = gameResult.calculateTotalScoreBy(Color.WHITE);
-        double blackScore = gameResult.calculateTotalScoreBy(Color.BLACK);
+        double whiteScore = score.calculateTotalScoreBy(Color.WHITE);
+        double blackScore = score.calculateTotalScoreBy(Color.BLACK);
 
         //then
         assertAll(

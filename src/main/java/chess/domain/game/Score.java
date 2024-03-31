@@ -6,12 +6,12 @@ import chess.domain.square.Square;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class GameResult {
+public class Score {
     private static final double PAWN_PENALTY = 0.5;
 
     private final Map<Square, Piece> pieces;
 
-    public GameResult(final Map<Square, Piece> pieces) {
+    public Score(final Map<Square, Piece> pieces) {
         this.pieces = pieces;
     }
 
