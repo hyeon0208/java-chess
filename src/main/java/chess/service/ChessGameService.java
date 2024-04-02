@@ -1,7 +1,7 @@
 package chess.service;
 
-import chess.dao.GameRepository;
-import chess.dao.PieceRepository;
+import chess.dao.GameDao;
+import chess.dao.PieceDao;
 import chess.domain.board.Board;
 import chess.domain.game.ChessGame;
 import chess.domain.piece.Piece;
@@ -12,20 +12,20 @@ import java.util.List;
 import java.util.Map;
 
 public class ChessGameService {
-    private final GameRepository gameRepository;
-    private final PieceRepository pieceRepository;
+    private final GameDao gameDao;
+    private final PieceDao pieceDao;
 
-    public ChessGameService(final GameRepository gameRepository, final PieceRepository pieceRepository) {
-        this.gameRepository = gameRepository;
-        this.pieceRepository = pieceRepository;
+    public ChessGameService(final GameDao gameDao, final PieceDao pieceDao) {
+        this.gameDao = gameDao;
+        this.pieceDao = pieceDao;
     }
 
     public Long saveGame(final ChessGame chessGame) {
         return Transaction.start(connection -> {
-            Long gameId = gameRepository.save(chessGame, connection);
+            Long gameId = gameDao.save(chessGame, connection);
             List<PieceResponse> pieceResponses = getPieceResponses(chessGame.getBoard());
             for (PieceResponse pieceResponse : pieceResponses) {
-                pieceRepository.save(pieceResponse, gameId, connection);
+                pieceDao.save(pieceResponse, gameId, connection);
             }
             return gameId;
         });
@@ -33,7 +33,7 @@ public class ChessGameService {
 
     public void loadGame(final ChessGame chessGame, final Long gameId) {
         Transaction.start(connection -> {
-            ChessGameResponse chessGameResponse = gameRepository.findById(gameId, connection);
+            ChessGameResponse chessGameResponse = gameDao.findById(gameId, connection);
             chessGame.load(chessGameResponse);
             return null;
         });
@@ -41,7 +41,7 @@ public class ChessGameService {
 
     public List<Long> findAllGame() {
         return Transaction.start(connection -> {
-            List<Long> gameIds = gameRepository.findIdAll(connection);
+            List<Long> gameIds = gameDao.findIdAll(connection);
             return gameIds;
         });
     }

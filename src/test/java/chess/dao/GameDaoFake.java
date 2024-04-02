@@ -8,32 +8,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameDaoFake implements GameRepository {
-    private final Map<Long, ChessGame> gameRepository;
+public class GameDaoFake implements GameDao {
+    private final Map<Long, ChessGame> games;
     private Long gameId;
 
     public GameDaoFake() {
-        this.gameRepository = new HashMap<>();
+        this.games = new HashMap<>();
         this.gameId = 0L;
     }
 
     @Override
     public Long save(final ChessGame chessGame, final Connection connection) {
         gameId += 1;
-        gameRepository.put(gameId, chessGame);
+        games.put(gameId, chessGame);
         return gameId;
     }
 
     @Override
     public ChessGameResponse findById(final Long gameId, final Connection connection) {
-        ChessGame chessGame = gameRepository.get(gameId);
+        ChessGame chessGame = games.get(gameId);
         return new ChessGameResponse(chessGame.getBoard(), chessGame.getTurn());
     }
 
     @Override
     public List<Long> findIdAll(final Connection connection) {
         List<Long> gameIds = new ArrayList<>();
-        gameIds.addAll(gameRepository.keySet());
+        gameIds.addAll(games.keySet());
         return gameIds;
     }
 }

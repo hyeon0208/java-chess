@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.dao.GameDaoFake;
-import chess.dao.GameRepository;
+import chess.dao.GameDao;
 import chess.dao.PieceDaoFake;
-import chess.dao.PieceRepository;
+import chess.dao.PieceDao;
 import chess.domain.board.Board;
 import chess.domain.game.ChessGame;
 import chess.domain.game.Turn;
@@ -30,9 +30,9 @@ class ChessGameServiceTest {
 
     @BeforeAll
     static void init() {
-        GameRepository gameRepository = new GameDaoFake();
-        PieceRepository pieceRepository = new PieceDaoFake();
-        chessGameService = new ChessGameService(gameRepository, pieceRepository);
+        GameDao gameDao = new GameDaoFake();
+        PieceDao pieceDao = new PieceDaoFake();
+        chessGameService = new ChessGameService(gameDao, pieceDao);
     }
 
     @Test
