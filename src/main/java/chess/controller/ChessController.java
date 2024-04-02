@@ -59,8 +59,8 @@ public class ChessController {
             CommandType commandType = command.getCommand();
             CommandAction commandAction = commandInvoker.get(commandType);
             return commandAction.execute(chessGame, command);
-        } catch (IllegalArgumentException error) {
-            outputView.printErrorMessage(error.getMessage());
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception.getMessage());
             return progress(chessGame);
         }
     }
