@@ -49,11 +49,7 @@ public class ChessGameService {
     public List<PieceResponse> getPieceResponses(final Board board) {
         Map<Square, Piece> pieces = board.getPieces();
         return pieces.entrySet().stream()
-                .map(entry -> new PieceResponse(
-                        entry.getKey().getFileIndex(),
-                        entry.getKey().getRankIndex(),
-                        entry.getValue().type(),
-                        entry.getValue().color())
-                ).toList();
+                .map(entry -> PieceResponse.of(entry.getKey(), entry.getValue()))
+                .toList();
     }
 }
