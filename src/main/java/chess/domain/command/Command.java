@@ -13,7 +13,7 @@ public class Command {
         this.commands = commands;
     }
 
-    public CommandType getCommand() {
+    public CommandType type() {
         return CommandType.from(commands);
     }
 

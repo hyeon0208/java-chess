@@ -1,9 +1,13 @@
 package chess.domain.command;
 
+import chess.controller.ChessController;
 import chess.domain.game.ChessGame;
 
-@FunctionalInterface
 public interface CommandAction {
 
-    CommandType execute(ChessGame chessGame, Command command);
+    void execute(ChessController chessController, ChessGame chessGame, Command command);
+
+    CommandAction change(CommandType commandType);
+
+    boolean isEnd();
 }
