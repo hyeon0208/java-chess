@@ -24,6 +24,10 @@ public class OutputView {
                 > 게임 시작 : start
                 > 게임 종료 : end
                 > 게임 이동 : move source위치 target위치 - 예. move b2 b3
+                > 점수 결과 : status
+                > 게임 방 검색 : search
+                > 게임 불러오기 : load 아이디 - 예. load 5
+                > 게임 저장 : save
                 """);
     }
 
