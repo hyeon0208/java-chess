@@ -1,15 +1,11 @@
 package chess.domain.command;
 
-import chess.controller.ChessController;
 import chess.domain.game.ChessGame;
+import chess.service.ChessGameService;
 
 public interface CommandAction {
 
-    void execute(ChessController chessController, ChessGame chessGame, Command command);
-
-    default CommandAction change(CommandType commandType) {
-        return commandType.action();
-    }
+    void execute(ChessGameService chessGameService, ChessGame chessGame, Command command);
 
     boolean isEnd();
 }

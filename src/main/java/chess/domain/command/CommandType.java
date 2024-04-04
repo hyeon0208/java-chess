@@ -4,25 +4,23 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum CommandType {
-    START("start", 1, new StartCommand()),
-    MOVE("move", 3, new MoveCommand()),
-    END("end", 1, new EndCommand()),
-    STATUS("status", 1, new StatusCommand()),
-    SEARCH("search", 1, new SearchCommand()),
-    LOAD("load", 2, new LoadCommand()),
-    SAVE("save", 1, new SaveCommand()),
+    START("start", 1),
+    MOVE("move", 3),
+    END("end", 1),
+    STATUS("status", 1),
+    SEARCH("search", 1),
+    LOAD("load", 2),
+    SAVE("save", 1),
     ;
 
     private static final int COMMAND_INDEX = 0;
 
     private final String value;
     private final int size;
-    private final CommandAction action;
 
-    CommandType(final String value, final int size, final CommandAction action) {
+    CommandType(final String value, final int size) {
         this.value = value;
         this.size = size;
-        this.action = action;
     }
 
     public static CommandType from(final List<String> command) {
@@ -35,9 +33,5 @@ public enum CommandType {
                 .filter(type -> type.size == command.size())
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게임 커맨드입니다."));
-    }
-
-    public CommandAction action() {
-        return action;
     }
 }

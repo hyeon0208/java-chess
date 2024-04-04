@@ -1,12 +1,12 @@
 package chess.domain.command;
 
-import chess.controller.ChessController;
 import chess.domain.game.ChessGame;
+import chess.service.ChessGameService;
 
 public class EndCommand implements CommandAction {
 
     @Override
-    public void execute(final ChessController chessController, final ChessGame chessGame, final Command command) {
+    public void execute(final ChessGameService chessGameService, final ChessGame chessGame, final Command command) {
     }
 
     @Override

@@ -1,14 +1,19 @@
 package chess.domain.command;
 
-import chess.controller.ChessController;
 import chess.domain.game.ChessGame;
+import chess.service.ChessGameService;
+import chess.view.OutputView;
 
 public class StatusCommand implements CommandAction {
+    private final OutputView outputView;
+
+    public StatusCommand(final OutputView outputView) {
+        this.outputView = outputView;
+    }
 
     @Override
-    public void execute(final ChessController chessController, final ChessGame chessGame, final Command command) {
-        chessController.printGameResult(chessGame);
-        chessController.progress(chessGame);
+    public void execute(final ChessGameService chessGameService, final ChessGame chessGame, final Command command) {
+        outputView.printGameResult(chessGameService.getGameResultResponse(chessGame));
     }
 
     @Override

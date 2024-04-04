@@ -4,9 +4,13 @@ import chess.dao.GameDao;
 import chess.dao.PieceDao;
 import chess.domain.board.Board;
 import chess.domain.game.ChessGame;
+import chess.domain.game.Score;
+import chess.domain.game.Winner;
+import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.square.Square;
 import chess.dto.ChessGameResponse;
+import chess.dto.GameResultResponse;
 import chess.dto.PieceResponse;
 import java.util.List;
 import java.util.Map;
@@ -51,5 +55,13 @@ public class ChessGameService {
         return pieces.entrySet().stream()
                 .map(entry -> PieceResponse.of(entry.getKey(), entry.getValue()))
                 .toList();
+    }
+
+    public GameResultResponse getGameResultResponse(final ChessGame chessGame) {
+        Score score = chessGame.createScore();
+        double whiteScore = score.calculateTotalScoreBy(Color.WHITE);
+        double blackScore = score.calculateTotalScoreBy(Color.BLACK);
+        Winner winner = Winner.of(whiteScore, blackScore);
+        return new GameResultResponse(whiteScore, blackScore, winner);
     }
 }
