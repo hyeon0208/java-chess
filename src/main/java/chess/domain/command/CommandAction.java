@@ -7,7 +7,9 @@ public interface CommandAction {
 
     void execute(ChessController chessController, ChessGame chessGame, Command command);
 
-    CommandAction change(CommandType commandType);
+    default CommandAction change(CommandType commandType) {
+        return commandType.action();
+    }
 
     boolean isEnd();
 }

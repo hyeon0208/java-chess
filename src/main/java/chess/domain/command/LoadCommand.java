@@ -14,11 +14,6 @@ public class LoadCommand implements CommandAction {
     }
 
     @Override
-    public CommandAction change(final CommandType commandType) {
-        return commandType.action();
-    }
-
-    @Override
     public boolean isEnd() {
         return false;
     }
